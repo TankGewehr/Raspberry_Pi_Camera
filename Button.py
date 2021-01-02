@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-img_path=".\icons\example.jpg"
+img_path=".\icons\example.png"
 img=cv2.imread(img_path)
 
 
