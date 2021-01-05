@@ -10,20 +10,6 @@ r=1                         #红色的比例初值
 g=1                         #绿色的比例初值
 b=1                         #蓝色的比例初值
 
-cv2.namedWindow('RGB')
-cv2.createTrackbar('Light','RGB',0,300,updateLight)
-cv2.createTrackbar('Contrast','RGB',0,255,updateContrast)
-cv2.createTrackbar('R','RGB',0,300,updateR)
-cv2.createTrackbar('G','RGB',0,300,updateG)
-cv2.createTrackbar('B','RGB',0,300,updateB)
-cv2.createTrackbar('Save','RGB',0,1,SavePicture)
-
-cv2.setTrackbarPos('Light','RGB',100)
-cv2.setTrackbarPos('Contrast','RGB',10)
-cv2.setTrackbarPos('R','RGB',100)
-cv2.setTrackbarPos('G','RGB',100)
-cv2.setTrackbarPos('B','RGB',100)
-
 
 #def nothing(x):
     #pass
@@ -60,6 +46,21 @@ def updateContrast(x):
 def SavePicture(x):
     cv2.imwrite('.\icons\saved.png',img)
     cv2.setTrackbarPos('Save','RGB',0)
+
+
+cv2.namedWindow('RGB')
+cv2.createTrackbar('Light','RGB',0,300,updateLight)
+cv2.createTrackbar('Contrast','RGB',0,255,updateContrast)
+cv2.createTrackbar('R','RGB',0,300,updateR)
+cv2.createTrackbar('G','RGB',0,300,updateG)
+cv2.createTrackbar('B','RGB',0,300,updateB)
+cv2.createTrackbar('Save','RGB',0,1,SavePicture)
+
+cv2.setTrackbarPos('Light','RGB',100)
+cv2.setTrackbarPos('Contrast','RGB',10)
+cv2.setTrackbarPos('R','RGB',100)
+cv2.setTrackbarPos('G','RGB',100)
+cv2.setTrackbarPos('B','RGB',100)
 
 
 while (True):
