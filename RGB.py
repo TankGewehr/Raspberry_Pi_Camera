@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-img_path=".\icons\example.png"
+img_path=".\\icons\\example.png"
 img=cv2.imread(img_path)    #用于显示的图像
 (B,G,R)=cv2.split(img)      #将图像分为RGB
 Light=0.3                   #亮度初值
@@ -9,10 +9,6 @@ Contrast=80                 #对比度初值
 r=1                         #红色的比例初值
 g=1                         #绿色的比例初值
 b=1                         #蓝色的比例初值
-
-
-#def nothing(x):
-    #pass
 
 def updata():
     global img
@@ -44,7 +40,7 @@ def updateContrast(x):
     Contrast=cv2.getTrackbarPos('Contrast','RGB')
 
 def SavePicture(x):
-    cv2.imwrite('.\icons\saved.png',img)
+    cv2.imwrite('.\\icons\\saved.png',img)
     cv2.setTrackbarPos('Save','RGB',0)
 
 

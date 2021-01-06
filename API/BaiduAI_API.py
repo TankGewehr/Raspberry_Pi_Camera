@@ -2,7 +2,15 @@ import requests
 import base64
 
 '''
-图像风格转换
+cartoon：卡通画风格
+pencil：铅笔风格
+color_pencil：彩色铅笔画风格
+warm：彩色糖块油画风格
+wave：神奈川冲浪里油画风格
+lavender：薰衣草油画风格
+mononoke：奇异油画风格
+scream：呐喊油画风格
+gothic：哥特油画风格
 '''
 
 request_url = "https://aip.baidubce.com/rest/2.0/image-process/v1/style_trans"

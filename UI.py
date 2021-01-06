@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import cvui
 
-img_path=".\icons\example.png"
+img_path=".\\icons\\example.png"
 img=cv2.imread(img_path)
 img2=img
 state=0
@@ -15,7 +15,7 @@ r=[0]
 g=[0]
 b=[0]
 
-icon_path=".\icons\cam.png"
+icon_path=".\\icons\\ban.png"
 icon=cv2.imread(icon_path)
 
 cv2.namedWindow('Picture')
@@ -27,7 +27,7 @@ def state0():
         Button1()
 
 def state1():
-    cvui.image(img2,10,280,icon)
+    cvui.image(img2,10,100,icon)
     if(cvui.button(img2,10,10,'Back')):
         Button2()
     cvui.window(img2,360,50,110,230,'RGB')
@@ -64,7 +64,7 @@ def Button2():
 
 #自定义函数 用于实现不同的功能
 def SavePicture():
-    cv2.imwrite('.\icons\saved.png',img)
+    cv2.imwrite('.\\icons\\saved.png',img)
 
 while (True):
     cvui.printf(img2,0,0,0.4,0xff0000,str(state))
