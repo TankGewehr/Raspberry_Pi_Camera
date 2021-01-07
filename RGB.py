@@ -3,12 +3,12 @@ import cv2
 
 img_path=".\\icons\\example.png"
 img=cv2.imread(img_path)    #用于显示的图像
-(B,G,R)=cv2.split(img)      #将图像分为RGB
-Light=0.3                   #亮度初值
-Contrast=80                 #对比度初值
-r=1                         #红色的比例初值
-g=1                         #绿色的比例初值
-b=1                         #蓝色的比例初值
+(B,G,R)=cv2.split(img)  #将图像分为RGB
+Light=0.3   #亮度初值
+Contrast=80 #对比度初值
+r=1 #红色的比例初值
+g=1 #绿色的比例初值
+b=1 #蓝色的比例初值
 
 def updata():
     global img

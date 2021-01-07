@@ -1,7 +1,7 @@
 #import numpy as np
 import cv2
 
-faceCascade=cv2.CascadeClassifier('.\haarcascade_frontalface_default.xml')
+faceCascade=cv2.CascadeClassifier('.\haarcascade_frontalface_default.xml')  #预训练分类器
 
 cap=cv2.VideoCapture(0)
 cap.set(3,480)

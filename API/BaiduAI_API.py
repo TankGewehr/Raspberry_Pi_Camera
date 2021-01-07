@@ -2,6 +2,7 @@ import requests
 import base64
 
 '''
+params中的option参数
 cartoon：卡通画风格
 pencil：铅笔风格
 color_pencil：彩色铅笔画风格

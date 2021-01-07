@@ -5,7 +5,7 @@ import cv2
 #cap.set(3,480)
 #cap.set(4,320)
 
-img=cv2.imread('.\icons\\ban.png')
+img=cv2.imread('.\icons\\bug.png')
 
 while True:
     #ret,img=cap.read()

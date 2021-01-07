@@ -7,9 +7,9 @@ img=cv2.imread(img_path)
 img2=img
 state=0
 
-(B,G,R)=cv2.split(img)      #将图像分为RGB
-Light=0.3                   #亮度初值
-Contrast=80                 #对比度初值
+(B,G,R)=cv2.split(img)  #将图像分为RGB
+Light=0.3   #亮度初值
+Contrast=80 #对比度初值
 CheckState=[False]
 r=[0]
 g=[0]
