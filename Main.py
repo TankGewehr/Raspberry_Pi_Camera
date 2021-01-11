@@ -125,7 +125,7 @@ def video(video_name):
         CheckState[3]=True
         cap=cv2.VideoCapture(video_path+str(video_name)+'.avi')
 
-videoout=cv2.VideoWriter(video_path+'VEDIOLIST.avi',fourcc,24,(1920,1080))
+videoout=cv2.VideoWriter(video_path+'temp.avi',fourcc,24,(1920,1080))
 
 def savevideo():
     global videoout
@@ -296,7 +296,7 @@ def state2():   #连拍模式 主界面
     icon('home',1776,16,0)
 
 def state3():   #视频模式 主界面
-    global CheckState,light
+    global CheckState,light,videoout
     if(CheckState[2]==False):
         if(icon('start',896,832)):
             savevideo()
@@ -304,6 +304,7 @@ def state3():   #视频模式 主界面
     else:
         if(icon('stop',896,832)):
             CheckState[2]=False
+            videoout=cv2.VideoWriter(video_path+'temp.avi',fourcc,24,(1920,1080))
     if(icon('light',16,16)):
         if(light==0):
             light=1
@@ -405,10 +406,14 @@ def state9():   #文件浏览 连拍
     icon('home',1776,16,0)
 
 def state10():  #文件浏览 视频
-    global CheckState,explorevideo
+    global CheckState,explorevideo,cap
     print('explore:'+str(explorevideo)+' count:'+str(videocount))
     video(str(result3[explorevideo])[2:-2])
-    icon('exit',16,16,4)
+    if(icon('exit',16,16,4)):
+        CheckState[3]=False
+        cap=cv2.VideoCapture(1)
+        cap.set(3,1920)
+        cap.set(4,1080)
     if(icon('left',16,476)):
         CheckState[3]=False
         explorevideo-=1
@@ -426,6 +431,8 @@ def state10():  #文件浏览 视频
     if(icon('home',1776,16,0)):
         CheckState[3]=False
         cap=cv2.VideoCapture(1)
+        cap.set(3,1920)
+        cap.set(4,1080)
 
 def state11():  #百度AI 风格选择
     global image_ui
