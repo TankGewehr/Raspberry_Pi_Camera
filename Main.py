@@ -6,7 +6,7 @@ import cv2
 import cvui
 import numpy as np
 import requests
-#impor RPi.GPIO
+#import RPi.GPIO
 
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(16,GPIO.OUT)
@@ -27,7 +27,7 @@ ret,image=cap.read()
 image_ui=image
 (B,G,R)=cv2.split(image)  #将图像分为RGB
 state=0 #状态
-CheckState=[False,False,False,False]    #保存状态
+CheckState=[False,False,False,False,False]    #保存状态
 burstnum=0  #连拍张数
 r=[0]
 g=[0]
@@ -491,9 +491,12 @@ def state12():  #文件浏览 连拍 RGB
         image_ui=burst(str(result2[exploreburst])[2:-2])
     (B,G,R)=cv2.split(image_ui)  #将图像分为RGB
     image_ui=cv2.merge([np.uint8(np.clip((B*(b[0]/50+1)),0,255)),np.uint8(np.clip((G*(g[0]/50+1)),0,255)),np.uint8(np.clip((R*(r[0]/50+1)),0,255))])   #合成RGB调整后的图像
+    if(CheckState[4]):
+        saveburst(image_ui)
+        burstnum=0
+        CheckState[4]=False
     if(icon('photo',896,832)):
-        CheckState[1]=True
-        burstnum=9
+        CheckState[4]=True
     icon('exit',16,16,9)
     cvui.window(image_ui,1440,200,440,900,'RGB')
     cvui.trackbar(image_ui,1480,400,400,r,-100,100)
