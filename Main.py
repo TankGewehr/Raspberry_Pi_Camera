@@ -224,7 +224,7 @@ def UI():   #更新界面进程 通过state的不同来选择不同的界面函�
                 cv2.rectangle(image_ui,(x,y),(x+w,y+h),(255,0,0),2)
                 roi_gray=gray[y:y+h,x:x+w]
                 roi_color=image_ui[y:y+h,x:x+w]
-    if(state==7 or state==12):   #若在RGB模式中
+    if(state==7):   #若在RGB模式中
         (B,G,R)=cv2.split(image)  #将图像分为RGB
         image=cv2.merge([np.uint8(np.clip((B*(b[0]/50+1)),0,255)),np.uint8(np.clip((G*(g[0]/50+1)),0,255)),np.uint8(np.clip((R*(r[0]/50+1)),0,255))])   #合成RGB调整后的图像
     if(state!=8 or state!=9 or state!=11 or state!=12):   #若不在浏览模式
@@ -477,6 +477,8 @@ def state12():  #文件浏览 连拍 RGB
     while(image_ui is None):
         exploreburst-=1
         image_ui=burst(str(result2[exploreburst])[2:-2])
+    (B,G,R)=cv2.split(image_ui)  #将图像分为RGB
+    image_ui=cv2.merge([np.uint8(np.clip((B*(b[0]/50+1)),0,255)),np.uint8(np.clip((G*(g[0]/50+1)),0,255)),np.uint8(np.clip((R*(r[0]/50+1)),0,255))])   #合成RGB调整后的图像
     if(icon('photo',896,832)):
         CheckState[1]=True
         burstnum=9
