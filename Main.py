@@ -6,7 +6,13 @@ import cv2
 import cvui
 import numpy as np
 import requests
+#impor RPi.GPIO
 
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(16,GPIO.OUT)
+#GPIO.setup(20,GPIO.OUT)
+
+#GPIO.output(16,GPIO.HIGH)
 
 faceCascade=cv2.CascadeClassifier('.\\haarcascade_frontalface_default.xml')
 cap=cv2.VideoCapture(1)
@@ -215,15 +221,15 @@ def API_style(path,style):  #API_style('.\\photos\\20210106200808.png','cartoon'
 def UI():   #更新界面进程 通过state的不同来选择不同的界面函数
     global image,image_ui,state,burstnum
     if(state==6):   #若在eye模式中
-        (B,G,R)=cv2.split(image)  #将图像分为RGB
-        image=cv2.merge([np.uint8(np.clip((B*(b[0]/50+1)),0,255)),np.uint8(np.clip((G*(g[0]/50+1)),0,255)),np.uint8(np.clip((R*(r[0]/50+1)),0,255))])   #合成RGB调整后的图像
         if(face==1):    #人脸识别
-            gray=cv2.cvtColor(image_ui,cv2.COLOR_BGR2GRAY)  #转化为灰度图像
+            gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)  #转化为灰度图像
             faces=faceCascade.detectMultiScale(gray,scaleFactor=1.2,minNeighbors=5,minSize=(10,10)) #识别参数
             for (x,y,w,h) in faces: #框选出人脸
-                cv2.rectangle(image_ui,(x,y),(x+w,y+h),(255,0,0),2)
+                cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
                 roi_gray=gray[y:y+h,x:x+w]
-                roi_color=image_ui[y:y+h,x:x+w]
+                roi_color=image[y:y+h,x:x+w]
+        (B,G,R)=cv2.split(image)  #将图像分为RGB
+        image=cv2.merge([np.uint8(np.clip((B*(b[0]/50+1)),0,255)),np.uint8(np.clip((G*(g[0]/50+1)),0,255)),np.uint8(np.clip((R*(r[0]/50+1)),0,255))])   #合成RGB调整后的图像
     if(state==7):   #若在RGB模式中
         (B,G,R)=cv2.split(image)  #将图像分为RGB
         image=cv2.merge([np.uint8(np.clip((B*(b[0]/50+1)),0,255)),np.uint8(np.clip((G*(g[0]/50+1)),0,255)),np.uint8(np.clip((R*(r[0]/50+1)),0,255))])   #合成RGB调整后的图像
@@ -289,9 +295,11 @@ def state2():   #连拍模式 主界面
     if(icon('light',16,16)):
         if(light==0):
             light=1
+            #GPIO.output(20,GPIO.HIGH)
             print('Flash light mode enable')
         else:
             light=0
+            #GPIO.output(20,GPIO.LOW)
             print('Flash light mode disable')
     icon('home',1776,16,0)
 
@@ -308,9 +316,11 @@ def state3():   #视频模式 主界面
     if(icon('light',16,16)):
         if(light==0):
             light=1
+            #GPIO.output(20,GPIO.HIGH)
             print('Flash light mode enable')
         else:
             light=0
+            #GPIO.output(20,GPIO.LOW)
             print('Flash light mode disable')
     icon('home',1776,16,0)
 
@@ -329,9 +339,11 @@ def state5():   #拍照模式 设置
     if(icon('light',280,476)):
         if(light==0):
             light=1
+            #GPIO.output(20,GPIO.HIGH)
             print('Flash light mode enable')
         else:
             light=0
+            #GPIO.output(20,GPIO.LOW)
             print('Flash light mode disable')
     if(icon('face',896,476)):
         if(face==0):
@@ -508,6 +520,10 @@ if __name__=='__main__':
         if cv2.waitKey(30) & 0xff==27 or state==-1:
             break
 
+
+    #GPIO.output(16,GPIO.LOW)
+    #GPIO.output(20,GPIO.LOW)
+    #GPIO.cleanup()
     cap.release()
     videoout.release()
     cv2.destroyAllWindows()
