@@ -471,7 +471,12 @@ def state11():  #百度AI 风格选择
     '''
 
 def state12():  #文件浏览 连拍 RGB
-    global CheckState,burstnum
+    global CheckState,burstnum,image_ui,exploreburst
+    print('explore:'+str(exploreburst)+' count:'+str(burstcount))
+    image_ui=burst(str(result2[exploreburst])[2:-2])
+    while(image_ui is None):
+        exploreburst-=1
+        image_ui=burst(str(result2[exploreburst])[2:-2])
     if(icon('photo',896,832)):
         CheckState[1]=True
         burstnum=9
